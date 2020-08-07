@@ -1,0 +1,66 @@
+This project uses data from the weather trends database which has the following schema:
+<table>: <fields>
+city_data: year, city, country, avg_temp
+city_list: city, country
+global_data: year, avg_temp
+
+There is no data for Honolulu, Hawaii. The following queries produced zero results.
+
+select * from city_list
+where city like 'Hono%' or city like 'hono%';
+
+select * from city_data
+where city like 'Hono%' or city like 'hono%';
+
+The closest cities Honolulu according to google are the following:
+
+    2550 miles to San Francisco, CA.
+    2559 miles to Oakland, CA.
+    2567 miles to San Jose, CA.
+    2568 miles to Fremont, CA.
+    2620 miles to Stockton, CA.
+    2628 miles to Modesto, CA.
+    2628 miles to Sacramento, CA.
+    2674 miles to Fresno, CA.
+
+I chose Oakland, California since I used to live there.
+
+Confirming with following sql query, there is only one city named Oakland in city_list table which produced the solitary result of Oakland United States
+select * from city_list
+where city like 'Oak%' or city like 'oak%'
+
+
+And I am going to assume there is only one city in the United States named Oakland for this project.
+
+------------not necessary----------
+To confirm that Oakland is the only city named Oakland in the world, the 2 following queries produced exactly the same results. I compared the 2 csv files results_oakland.csv and results_oakland2.csv using diff
+
+select * from city_data
+where city_data.city like 'oak%' or city_data.city like 'Oak%'
+
+select city_data.* from city_data
+join city_list
+on city_list.city = city_data.city
+where city_data.city like 'oak%' or city_data.city like 'Oak%'
+-------------end--------------
+
+The weather trends database has the following schema:
+
+I extracted the data from this database using the following query:
+(a)
+select * from city_data
+where city_data.city like 'oak%' or city_data.city like 'Oak%'
+(b)
+select city_data.*
+from city_data join global_data
+on city_data.year = global_data.year
+where city_data.city = 'Oakland'
+(c)
+select city_data.*, global_data.year as global_year, global_data.avg_temp as global_avg_temp
+from city_data join global_data
+on city_data.year = global_data.year
+where city_data.city = 'Oakland'
+
+It is complete as (a) and (b) sql queries produced the same results. The right, left, and full joins also produced the same 165 results. I used diff on the extracted csv files.
+
+I used (c) sql query to include both Oakland and global data in one csv file.
