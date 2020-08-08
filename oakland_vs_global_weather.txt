@@ -32,6 +32,9 @@ where city like 'Oak%' or city like 'oak%'
 
 And I am going to assume there is only one city in the United States named Oakland for this project.
 
+**The tools used in the project:** 
+
+SQL, Emacs, Unix command line, Python, csv module, pandas, matplotlib and seaborn
 ------------not necessary----------
 To confirm that Oakland is the only city named Oakland in the world, the 2 following queries produced exactly the same results. I compared the 2 csv files results_oakland.csv and results_oakland2.csv using diff
 
@@ -56,11 +59,13 @@ from city_data join global_data
 on city_data.year = global_data.year
 where city_data.city = 'Oakland'
 (c)
+select * from global_data
+(d)
 select city_data.*, global_data.year as global_year, global_data.avg_temp as global_avg_temp
 from city_data join global_data
 on city_data.year = global_data.year
 where city_data.city = 'Oakland'
 
-It is complete as (a) and (b) sql queries produced the same results. The right, left, and full joins also produced the same 165 results. I used diff on the extracted csv files.
+It is complete as (a) and (b) sql queries produced the same results. The right, left, and full joins also produced the same 165 results. I used diff on the extracted csv files. But it seems that outer joins do not work since sql query (c) for global data produced 266 results. I will ignore the data previous to Oakland's first year of recorded temperature in 1849.
 
-I used (c) sql query to include both Oakland and global data in one csv file.
+I used sql query (d) to include both Oakland and global data in one csv file.
