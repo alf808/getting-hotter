@@ -69,3 +69,10 @@ where city_data.city = 'Oakland'
 It is complete as (a) and (b) sql queries produced the same results. The right, left, and full joins also produced the same 165 results. I used diff on the extracted csv files. But it seems that outer joins do not work since sql query (c) for global data produced 266 results. I will ignore the data previous to Oakland's first year of recorded temperature in 1849.
 
 I used sql query (d) to include both Oakland and global data in one csv file.
+
+Observations
+Oakland's yearly average temperatures are higher than those of the whole planet.
+The plotline of  global average temperatures indicates that there is a general warming of the planet.
+Experimenting with different window periods for the moving average, it was not clear that there was a trend in Oakland. Settling for window period of 8, I noticed that there was a warming trend starting around the year 1975.
+In fact, the global warming trend was much clearer around the year 1975. Although there was already a subtle global warming trend around 1880s.
+Trusting the data, I would like to conclude that it is getting hotter globally and locally. But It was only clear in Oakland starting around 1975.
